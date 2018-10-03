@@ -45,6 +45,10 @@ public class ConexionJavaMongo {
         Coleccion_Pelicula.deleteOne(eq("Nombre_Pelicula", "Rango"));
         Coleccion_Pelicula.deleteOne(eq("Nombre_Pelicula", "Rango"));
         
+        //Actualizacion de valores de una coleccion
+        Coleccion_Pelicula.updateOne(new BasicDBObject("Nombre_Pelicula", "Rango"), new BasicDBObject("$set", new BasicDBObject("Genero", "Terror")));
+        
+            //Lee todos los valores que se encuentran en la coleccion Pelicula
         try (MongoCursor<Document> cur = Coleccion_Pelicula.find().iterator()) {
             while (cur.hasNext()) {
 
