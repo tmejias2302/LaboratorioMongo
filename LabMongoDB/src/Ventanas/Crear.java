@@ -1,19 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Ventanas;
 
-/**
- *
- * @author tmeji
- */
+import javax.swing.JFrame;
+
 public class Crear extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Crear
-     */
+
     public Crear() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -29,7 +20,8 @@ public class Crear extends javax.swing.JFrame {
     private void initComponents() {
 
         BotonAddActores = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        Boton_AñadirPelicula = new javax.swing.JButton();
+        Boton_VolverCrear = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -58,9 +50,18 @@ public class Crear extends javax.swing.JFrame {
         BotonAddActores.setText("Añadir más actores");
         getContentPane().add(BotonAddActores, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 520, -1, -1));
 
-        jButton1.setFont(new java.awt.Font("Yu Gothic UI", 2, 18)); // NOI18N
-        jButton1.setText("Añadir película a la base de datos");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 690, -1, -1));
+        Boton_AñadirPelicula.setFont(new java.awt.Font("Yu Gothic UI", 2, 18)); // NOI18N
+        Boton_AñadirPelicula.setText("Añadir película a la base de datos");
+        getContentPane().add(Boton_AñadirPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 690, -1, -1));
+
+        Boton_VolverCrear.setFont(new java.awt.Font("Yu Gothic UI", 2, 18)); // NOI18N
+        Boton_VolverCrear.setText("Volver");
+        Boton_VolverCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Boton_VolverCrearActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Boton_VolverCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 690, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 2, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -131,6 +132,13 @@ public class Crear extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void Boton_VolverCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_VolverCrearActionPerformed
+        JFrame Principal = new Principal();
+        Principal.setLocationRelativeTo(Principal);
+        Principal.setVisible(true);
+        this.hide();
+    }//GEN-LAST:event_Boton_VolverCrearActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -168,6 +176,8 @@ public class Crear extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonAddActores;
+    private javax.swing.JButton Boton_AñadirPelicula;
+    private javax.swing.JButton Boton_VolverCrear;
     private javax.swing.JLabel Franquicia;
     private javax.swing.JTextField Info_Actores;
     private javax.swing.JTextField Info_Compañia;
@@ -178,7 +188,6 @@ public class Crear extends javax.swing.JFrame {
     private javax.swing.JTextField Info_NombrePeli;
     private javax.swing.JTextField Info_Pais;
     private javax.swing.JTextField Info_Tiempo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -1,5 +1,7 @@
 package Ventanas;
 
+import javax.swing.JFrame;
+
 public class Principal extends javax.swing.JFrame {
 
     public Principal() {
@@ -29,18 +31,38 @@ public class Principal extends javax.swing.JFrame {
 
         BotonCrear.setFont(new java.awt.Font("Yu Gothic UI", 2, 18)); // NOI18N
         BotonCrear.setText("Crear");
+        BotonCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonCrearActionPerformed(evt);
+            }
+        });
         getContentPane().add(BotonCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 120, 50));
 
         BotonLeer.setFont(new java.awt.Font("Yu Gothic UI", 2, 18)); // NOI18N
         BotonLeer.setText("Leer");
+        BotonLeer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonLeerActionPerformed(evt);
+            }
+        });
         getContentPane().add(BotonLeer, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 120, 50));
 
         BotonEliminar.setFont(new java.awt.Font("Yu Gothic UI", 2, 18)); // NOI18N
         BotonEliminar.setText("Eliminar");
+        BotonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonEliminarActionPerformed(evt);
+            }
+        });
         getContentPane().add(BotonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 120, 50));
 
         BotonActualizar.setFont(new java.awt.Font("Yu Gothic UI", 2, 18)); // NOI18N
         BotonActualizar.setText("Actualizar");
+        BotonActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonActualizarActionPerformed(evt);
+            }
+        });
         getContentPane().add(BotonActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 120, 50));
 
         BotonConsultas.setFont(new java.awt.Font("Yu Gothic UI", 2, 18)); // NOI18N
@@ -52,6 +74,34 @@ public class Principal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BotonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCrearActionPerformed
+        JFrame Crear = new Crear();
+        Crear.setLocationRelativeTo(Crear);
+        Crear.setVisible(true);
+        this.hide();
+    }//GEN-LAST:event_BotonCrearActionPerformed
+
+    private void BotonLeerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonLeerActionPerformed
+        JFrame Leer = new Leer();
+        Leer.setLocationRelativeTo(Leer);
+        Leer.setVisible(true);
+        this.hide();
+    }//GEN-LAST:event_BotonLeerActionPerformed
+
+    private void BotonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEliminarActionPerformed
+        JFrame Eliminar = new Eliminar();
+        Eliminar.setLocationRelativeTo(Eliminar);
+        Eliminar.setVisible(true);
+        this.hide();
+    }//GEN-LAST:event_BotonEliminarActionPerformed
+
+    private void BotonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonActualizarActionPerformed
+        JFrame Actualizar = new Actualizar();
+        Actualizar.setLocationRelativeTo(Actualizar);
+        Actualizar.setVisible(true);
+        this.hide();
+    }//GEN-LAST:event_BotonActualizarActionPerformed
 
     /**
      * @param args the command line arguments
