@@ -32,24 +32,31 @@ public class ConexionJavaMongo {
         
         //Agregar informacion a al documentoPelicula
         List<String> actores = Arrays.asList("Thomas", "Luis");
-        Document documentoPelicula = new Document("Nombre_Pelicula", "Rango")
-                .append("Genero", "Comedia").append("Nombre_Director", "Jaime")
-                .append("Franquicia", "Faketon").append("Pais_Produccion", "USA")
-                .append("Año_Estreno", 2011).append("Duracion_Minutos", 165)
-                .append("Compañia_Productora", "Los pollos hermanos")
+        Document documentoPelicula = new Document("Nombre_Pelicula", "Chijiro")
+                .append("Genero", "Suspenso").append("Nombre_Director", "Lionel")
+                .append("Franquicia", "LOP").append("Pais_Produccion", "Japon")
+                .append("Año_Estreno", 2003).append("Duracion_Minutos", 165)
+                .append("Compañia_Productora", "Los Manga")
                 .append("Actores", actores);
         Coleccion_Pelicula.insertOne(documentoPelicula);
         
+        
+        Document doc = Coleccion_Pelicula.find(Filters.or(Filters.eq("Nombre_Pelicula", "Chijiro"))).first();
+        if (doc != null) {
+            System.out.println(doc.getString("Franquicia"));
+            System.out.println(doc.getString("Genero"));
+        }
+        
         //Borrar valores especificos de un documento
+        /*Coleccion_Pelicula.deleteOne(eq("Nombre_Pelicula", "Rango"));
         Coleccion_Pelicula.deleteOne(eq("Nombre_Pelicula", "Rango"));
-        Coleccion_Pelicula.deleteOne(eq("Nombre_Pelicula", "Rango"));
-        Coleccion_Pelicula.deleteOne(eq("Nombre_Pelicula", "Rango"));
+        Coleccion_Pelicula.deleteOne(eq("Nombre_Pelicula", "Rango"));*/
         
         //Actualizacion de valores de una coleccion
-        Coleccion_Pelicula.updateOne(new BasicDBObject("Nombre_Pelicula", "Rango"), new BasicDBObject("$set", new BasicDBObject("Genero", "Terror")));
+        //Coleccion_Pelicula.updateOne(new BasicDBObject("Nombre_Pelicula", "Rango"), new BasicDBObject("$set", new BasicDBObject("Genero", "Terror")));
         
-            //Lee todos los valores que se encuentran en la coleccion Pelicula
-        try (MongoCursor<Document> cur = Coleccion_Pelicula.find().iterator()) {
+        //Lee todos los valores que se encuentran en la coleccion Pelicula
+        /*try (MongoCursor<Document> cur = Coleccion_Pelicula.find().iterator()) {
             while (cur.hasNext()) {
 
                 Document doc = cur.next();
@@ -65,7 +72,7 @@ public class ConexionJavaMongo {
                 System.out.print(list.get(8)+ "\n");
                 System.out.print(list.get(9)+ "\n");
             }
-        }
+        }*/
 
         mongoClient.close();
 
