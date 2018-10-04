@@ -1,6 +1,7 @@
 package labmongodb;
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.DBCursor;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
@@ -16,66 +17,78 @@ import java.util.Map;
 import org.bson.Document;
 
 public class ConexionJavaMongo {
+    //Conectando con el servidor
+    MongoClient mongoClient = new MongoClient("localhost", 27017);
 
-    public static void main(String args[]) {
-        //Conectando con el servidor
-        MongoClient mongoClient = new MongoClient("localhost", 27017);
+    //Creando la base de datos
+    MongoDatabase BD = mongoClient.getDatabase("Setimo_Arte");
 
-        //Creando la base de datos
-        MongoDatabase BD = mongoClient.getDatabase("Setimo_Arte");
+    // Retrieving a collection
+    MongoCollection<Document> Coleccion_Pelicula = BD.getCollection("Pelicula");
+    
+    MongoCursor < Document > cursor = Coleccion_Pelicula.find().iterator();
 
-        // Retrieving a collection
-        MongoCollection<Document> Coleccion_Pelicula = BD.getCollection("Pelicula");
-
-        //Creando la coleccion para la base de datos
-        //DBCollection Coleccion_Productora = (DBCollection) BD.getCollection("Compañia_Productora");
+    public void Agregar_Pelicula(String Nombre_Pelicula,String Genero,String Nombre_Director,
+            String Franquicia,String Pais,int año,int minutos,String Compañia) {
         
-        //Agregar informacion a al documentoPelicula
+        //Agregar informacion al documentoPelicula
         List<String> actores = Arrays.asList("Thomas", "Luis");
-        Document documentoPelicula = new Document("Nombre_Pelicula", "Chijiro")
-                .append("Genero", "Suspenso").append("Nombre_Director", "Lionel")
-                .append("Franquicia", "LOP").append("Pais_Produccion", "Japon")
-                .append("Año_Estreno", 2003).append("Duracion_Minutos", 165)
-                .append("Compañia_Productora", "Los Manga")
+        Document documentoPelicula = new Document("Nombre_Pelicula", Nombre_Pelicula)
+                .append("Genero", Genero).append("Nombre_Director", Nombre_Director)
+                .append("Franquicia", Franquicia).append("Pais_Produccion", Pais)
+                .append("Año_Estreno", año).append("Duracion_Minutos", minutos)
+                .append("Compañia_Productora", Compañia)
                 .append("Actores", actores);
         Coleccion_Pelicula.insertOne(documentoPelicula);
-        
-        
-        Document doc = Coleccion_Pelicula.find(Filters.or(Filters.eq("Nombre_Pelicula", "Chijiro"))).first();
-        if (doc != null) {
-            System.out.println(doc.getString("Franquicia"));
-            System.out.println(doc.getString("Genero"));
-        }
-        
-        //Borrar valores especificos de un documento
-        /*Coleccion_Pelicula.deleteOne(eq("Nombre_Pelicula", "Rango"));
-        Coleccion_Pelicula.deleteOne(eq("Nombre_Pelicula", "Rango"));
-        Coleccion_Pelicula.deleteOne(eq("Nombre_Pelicula", "Rango"));*/
-        
-        //Actualizacion de valores de una coleccion
-        //Coleccion_Pelicula.updateOne(new BasicDBObject("Nombre_Pelicula", "Rango"), new BasicDBObject("$set", new BasicDBObject("Genero", "Terror")));
-        
-        //Lee todos los valores que se encuentran en la coleccion Pelicula
-        /*try (MongoCursor<Document> cur = Coleccion_Pelicula.find().iterator()) {
-            while (cur.hasNext()) {
-
-                Document doc = cur.next();
-
-                List list = new ArrayList(doc.values());
-                System.out.print(list.get(1)+ "\n");
-                System.out.print(list.get(2)+ "\n");
-                System.out.print(list.get(3)+ "\n");
-                System.out.print(list.get(4)+ "\n");
-                System.out.print(list.get(5)+ "\n");
-                System.out.print(list.get(6)+ "\n");
-                System.out.print(list.get(7)+ "\n");
-                System.out.print(list.get(8)+ "\n");
-                System.out.print(list.get(9)+ "\n");
-            }
-        }*/
-
         mongoClient.close();
-
+    }
+    
+    /*Document doc = Coleccion_Pelicula.find(Filters.or(Filters.eq("Nombre_Pelicula", "Chijiro"))).first();
+    if (doc != null) {
+            System.out.println(doc.getString("Franquicia"));
+        System.out.println(doc.getString("Genero"));
+    }*/
+    
+    
+    public void Borrar_Pelicula(String Nombre_Pelicula){
+        //Borrar valores especificos de un documento
+        Coleccion_Pelicula.deleteOne(eq("Nombre_Pelicula", Nombre_Pelicula));
+        mongoClient.close();
     }
 
+    //Actualizacion de valores de una coleccion
+    public void Actualizar_Pelicula(String Nombre_Pelicula,String Categoria){   
+        Coleccion_Pelicula.updateOne(new BasicDBObject("Nombre_Pelicula", Nombre_Pelicula), new BasicDBObject("$set", new BasicDBObject(Categoria, "Terror")));
+        mongoClient.close();
+    }       
+    
+    //Lee todos los valores que se encuentran en la coleccion Pelicula
+    public void Leer_Pelicula(String Nombre_Pelicula) {
+        FindIterable<Document> findIterable = Coleccion_Pelicula.find(eq("Nombre_Pelicula", Nombre_Pelicula));
+        System.out.println(findIterable.iterator().hasNext());
+
+        while (findIterable.iterator().hasNext()) {
+
+            Document doc = findIterable.iterator().next();
+
+            List list = new ArrayList(doc.values());
+            System.out.print(list.get(1) + "\n");
+            System.out.print(list.get(2) + "\n");
+            System.out.print(list.get(3) + "\n");
+            System.out.print(list.get(4) + "\n");
+            System.out.print(list.get(5) + "\n");
+            System.out.print(list.get(6) + "\n");
+            System.out.print(list.get(7) + "\n");
+            System.out.print(list.get(8) + "\n");
+            System.out.print(list.get(9) + "\n");
+            break;
+        }
+
+        mongoClient.close();
+    }
+    public static void main(String[] args) {
+        ConexionJavaMongo Pelicula = new ConexionJavaMongo();
+        Pelicula.Leer_Pelicula("Chijiro");     
+    }
+        
 }
