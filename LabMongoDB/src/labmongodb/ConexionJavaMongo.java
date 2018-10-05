@@ -51,48 +51,43 @@ public class ConexionJavaMongo {
         System.out.println(doc.getString("Genero"));
     }*/
     
-    
+    //Borrar valores especificos de un documento
     public void Borrar_Pelicula(String Nombre_Pelicula){
-        //Borrar valores especificos de un documento
         Coleccion_Pelicula.deleteOne(eq("Nombre_Pelicula", Nombre_Pelicula));
+        JOptionPane.showMessageDialog(null, "PELÍCULA ELIMINADA", "Informacion", JOptionPane.INFORMATION_MESSAGE);
         mongoClient.close();
     }
 
     //Actualizacion de valores de una coleccion
-    public void Actualizar_Pelicula(String Nombre_Pelicula,String Categoria){   
-        Coleccion_Pelicula.updateOne(new BasicDBObject("Nombre_Pelicula", Nombre_Pelicula), new BasicDBObject("$set", new BasicDBObject(Categoria, "Terror")));
+    public void Actualizar_Pelicula(String Nombre_Pelicula,String Categoria,String DatoActualizar){   
+        Coleccion_Pelicula.updateOne(new BasicDBObject("Nombre_Pelicula", Nombre_Pelicula), new BasicDBObject("$set", new BasicDBObject(Categoria, DatoActualizar)));
         mongoClient.close();
     }       
     
     //Lee todos los valores que se encuentran en la coleccion Pelicula
     public void Leer_Pelicula(String Nombre_Pelicula) {
         FindIterable<Document> findIterable = Coleccion_Pelicula.find(eq("Nombre_Pelicula", Nombre_Pelicula));
-        System.out.println(findIterable.iterator().hasNext());
+ 
+        Document doc = findIterable.iterator().next();
 
-        while (findIterable.iterator().hasNext()) {
-
-            Document doc = findIterable.iterator().next();
-
-            List list = new ArrayList(doc.values());
-            System.out.print(list.get(1) + "\n");
-            System.out.print(list.get(2) + "\n");
-            System.out.print(list.get(3) + "\n");
-            System.out.print(list.get(4) + "\n");
-            System.out.print(list.get(5) + "\n");
-            System.out.print(list.get(6) + "\n");
-            System.out.print(list.get(7) + "\n");
-            System.out.print(list.get(8) + "\n");
-            System.out.print(list.get(9) + "\n");
-            break;
-        }
+        List list = new ArrayList(doc.values());
+        System.out.print(list.get(1) + "\n");
+        System.out.print(list.get(2) + "\n");
+        System.out.print(list.get(3) + "\n");
+        System.out.print(list.get(4) + "\n");
+        System.out.print(list.get(5) + "\n");
+        System.out.print(list.get(6) + "\n");
+        System.out.print(list.get(7) + "\n");
+        System.out.print(list.get(8) + "\n");
+        System.out.print(list.get(9) + "\n");
 
         mongoClient.close();
     }
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         ConexionJavaMongo Pelicula = new ConexionJavaMongo();
         //Pelicula.Borrar_Pelicula("Chijiro");
         //Pelicula.Borrar_Pelicula("Rango");
         Pelicula.Leer_Pelicula("Scary Movie"); 
-    }*/
+    }
         
 }

@@ -1,6 +1,7 @@
 package Ventanas;
 
 import javax.swing.JFrame;
+import labmongodb.ConexionJavaMongo;
 
 public class Eliminar extends javax.swing.JFrame {
 
@@ -31,6 +32,11 @@ public class Eliminar extends javax.swing.JFrame {
 
         Boton_EliminarPelicula.setFont(new java.awt.Font("Yu Gothic UI", 2, 18)); // NOI18N
         Boton_EliminarPelicula.setText("Eliminar Película");
+        Boton_EliminarPelicula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Boton_EliminarPeliculaActionPerformed(evt);
+            }
+        });
         getContentPane().add(Boton_EliminarPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 170, 160, 40));
 
         Boton_VolverCrear.setFont(new java.awt.Font("Yu Gothic UI", 2, 18)); // NOI18N
@@ -62,6 +68,11 @@ public class Eliminar extends javax.swing.JFrame {
         Principal.setVisible(true);
         this.hide();
     }//GEN-LAST:event_Boton_VolverCrearActionPerformed
+
+    private void Boton_EliminarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_EliminarPeliculaActionPerformed
+        ConexionJavaMongo peliculaEliminar = new ConexionJavaMongo();
+        peliculaEliminar.Borrar_Pelicula(Info_NombrePeli.getText());
+    }//GEN-LAST:event_Boton_EliminarPeliculaActionPerformed
 
     /**
      * @param args the command line arguments

@@ -1,6 +1,8 @@
 package Ventanas;
 
+import java.util.Arrays;
 import javax.swing.JFrame;
+import labmongodb.ConexionJavaMongo;
 
 public class Actualizar extends javax.swing.JFrame {
 
@@ -19,21 +21,28 @@ public class Actualizar extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Boton_EliminarPelicula = new javax.swing.JButton();
+        Boton_ActualizarPelicula = new javax.swing.JButton();
         Boton_VolverCrear = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        Info_NombrePeli = new javax.swing.JTextField();
+        Info_Categoria = new javax.swing.JTextField();
         Info_Actualizar = new javax.swing.JTextField();
-        CamposDatos = new javax.swing.JComboBox<>();
         jLabelFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Boton_EliminarPelicula.setFont(new java.awt.Font("Yu Gothic UI", 2, 18)); // NOI18N
-        Boton_EliminarPelicula.setText("Actualizar Datos");
-        getContentPane().add(Boton_EliminarPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 370, 160, 40));
+        Boton_ActualizarPelicula.setFont(new java.awt.Font("Yu Gothic UI", 2, 18)); // NOI18N
+        Boton_ActualizarPelicula.setText("Actualizar Datos");
+        Boton_ActualizarPelicula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Boton_ActualizarPeliculaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Boton_ActualizarPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 520, 160, 40));
 
         Boton_VolverCrear.setFont(new java.awt.Font("Yu Gothic UI", 2, 18)); // NOI18N
         Boton_VolverCrear.setText("Volver");
@@ -47,19 +56,26 @@ public class Actualizar extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 2, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setText("Digite el nuevo dato a actualizar");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, 520, 50));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 320, 520, 50));
 
         jLabel2.setFont(new java.awt.Font("Yu Gothic UI", 2, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel2.setText("Seleccione el dato que desea actualizar");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 630, 40));
+        jLabel2.setText("Seleccione la categoría que desea actualizar");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, 710, 50));
+
+        jLabel3.setFont(new java.awt.Font("Yu Gothic UI", 2, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel3.setText("Seleccione la película que desea actualizar");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 680, 40));
+
+        Info_NombrePeli.setFont(new java.awt.Font("Yu Gothic UI", 2, 18)); // NOI18N
+        getContentPane().add(Info_NombrePeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 460, 40));
+
+        Info_Categoria.setFont(new java.awt.Font("Yu Gothic UI", 2, 18)); // NOI18N
+        getContentPane().add(Info_Categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, 450, 40));
 
         Info_Actualizar.setFont(new java.awt.Font("Yu Gothic UI", 2, 18)); // NOI18N
-        getContentPane().add(Info_Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, 450, 40));
-
-        CamposDatos.setFont(new java.awt.Font("Yu Gothic UI", 2, 18)); // NOI18N
-        CamposDatos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre de la Película", "Género", "Nombre del director", "Franquicia", "País de rodaje", "Año de estreno", "Duracion de minutos", "Compañia Productora", "Actores" }));
-        getContentPane().add(CamposDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 240, -1));
+        getContentPane().add(Info_Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 430, 450, 40));
 
         jLabelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ImagenInterfaz.jpg"))); // NOI18N
         getContentPane().add(jLabelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 921, 749));
@@ -73,6 +89,15 @@ public class Actualizar extends javax.swing.JFrame {
         Principal.setVisible(true);
         this.hide();
     }//GEN-LAST:event_Boton_VolverCrearActionPerformed
+
+    private void Boton_ActualizarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_ActualizarPeliculaActionPerformed
+       /* ConexionJavaMongo peliculaActualizar = new ConexionJavaMongo();
+        if (Info_Categoria.getText().equals("Año") == true){
+            String Año = Info_Actualizar.getText();
+            int AñoConv = Integer.parseInt(Año);
+            peliculaActualizar.Actualizar_Pelicula(Info_NombrePeli, Año, Año);
+        }*/
+    }//GEN-LAST:event_Boton_ActualizarPeliculaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -117,12 +142,14 @@ public class Actualizar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Boton_EliminarPelicula;
+    private javax.swing.JButton Boton_ActualizarPelicula;
     private javax.swing.JButton Boton_VolverCrear;
-    private javax.swing.JComboBox<String> CamposDatos;
     private javax.swing.JTextField Info_Actualizar;
+    private javax.swing.JTextField Info_Categoria;
+    private javax.swing.JTextField Info_NombrePeli;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelFondo;
     // End of variables declaration//GEN-END:variables
 }
