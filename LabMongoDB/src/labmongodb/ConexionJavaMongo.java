@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JOptionPane;
 import org.bson.Document;
 
 public class ConexionJavaMongo {
@@ -28,11 +29,11 @@ public class ConexionJavaMongo {
     
     MongoCursor < Document > cursor = Coleccion_Pelicula.find().iterator();
 
+    //Agregar informacion al documentoPelicula
     public void Agregar_Pelicula(String Nombre_Pelicula,String Genero,String Nombre_Director,
-            String Franquicia,String Pais,int año,int minutos,String Compañia) {
+            String Franquicia,String Pais,int año,int minutos,String Compañia,List<String> actores) {
         
         //Agregar informacion al documentoPelicula
-        List<String> actores = Arrays.asList("Thomas", "Luis");
         Document documentoPelicula = new Document("Nombre_Pelicula", Nombre_Pelicula)
                 .append("Genero", Genero).append("Nombre_Director", Nombre_Director)
                 .append("Franquicia", Franquicia).append("Pais_Produccion", Pais)
@@ -40,6 +41,7 @@ public class ConexionJavaMongo {
                 .append("Compañia_Productora", Compañia)
                 .append("Actores", actores);
         Coleccion_Pelicula.insertOne(documentoPelicula);
+        JOptionPane.showMessageDialog(null, "PELÍCULA REGISTRADA", "Informacion", JOptionPane.INFORMATION_MESSAGE);
         mongoClient.close();
     }
     
@@ -86,9 +88,11 @@ public class ConexionJavaMongo {
 
         mongoClient.close();
     }
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         ConexionJavaMongo Pelicula = new ConexionJavaMongo();
-        Pelicula.Leer_Pelicula("Chijiro");     
-    }
+        //Pelicula.Borrar_Pelicula("Chijiro");
+        //Pelicula.Borrar_Pelicula("Rango");
+        Pelicula.Leer_Pelicula("Scary Movie"); 
+    }*/
         
 }

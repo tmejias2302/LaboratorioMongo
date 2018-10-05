@@ -1,6 +1,9 @@
 package Ventanas;
 
+import java.util.Arrays;
+import java.util.List;
 import javax.swing.JFrame;
+import labmongodb.ConexionJavaMongo;
 
 public class Crear extends javax.swing.JFrame {
 
@@ -19,7 +22,6 @@ public class Crear extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        BotonAddActores = new javax.swing.JButton();
         Boton_AñadirPelicula = new javax.swing.JButton();
         Boton_VolverCrear = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -46,12 +48,13 @@ public class Crear extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        BotonAddActores.setFont(new java.awt.Font("Yu Gothic UI", 2, 18)); // NOI18N
-        BotonAddActores.setText("Añadir más actores");
-        getContentPane().add(BotonAddActores, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 520, -1, -1));
-
         Boton_AñadirPelicula.setFont(new java.awt.Font("Yu Gothic UI", 2, 18)); // NOI18N
         Boton_AñadirPelicula.setText("Añadir película a la base de datos");
+        Boton_AñadirPelicula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Boton_AñadirPeliculaActionPerformed(evt);
+            }
+        });
         getContentPane().add(Boton_AñadirPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 690, -1, -1));
 
         Boton_VolverCrear.setFont(new java.awt.Font("Yu Gothic UI", 2, 18)); // NOI18N
@@ -120,10 +123,20 @@ public class Crear extends javax.swing.JFrame {
 
         Info_Franquicia.setFont(new java.awt.Font("Yu Gothic UI", 2, 18)); // NOI18N
         getContentPane().add(Info_Franquicia, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, 330, 30));
+
+        Info_Pais.setFont(new java.awt.Font("Yu Gothic UI", 2, 18)); // NOI18N
         getContentPane().add(Info_Pais, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 260, 300, 30));
+
+        Info_Estreno.setFont(new java.awt.Font("Yu Gothic UI", 2, 18)); // NOI18N
         getContentPane().add(Info_Estreno, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, 200, 30));
+
+        Info_Tiempo.setFont(new java.awt.Font("Yu Gothic UI", 2, 18)); // NOI18N
         getContentPane().add(Info_Tiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 360, 250, 30));
+
+        Info_Compañia.setFont(new java.awt.Font("Yu Gothic UI", 2, 18)); // NOI18N
         getContentPane().add(Info_Compañia, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 420, 270, 30));
+
+        Info_Actores.setFont(new java.awt.Font("Yu Gothic UI", 2, 18)); // NOI18N
         getContentPane().add(Info_Actores, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 480, 310, 30));
 
         jLabelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ImagenInterfaz.jpg"))); // NOI18N
@@ -138,6 +151,18 @@ public class Crear extends javax.swing.JFrame {
         Principal.setVisible(true);
         this.hide();
     }//GEN-LAST:event_Boton_VolverCrearActionPerformed
+
+    private void Boton_AñadirPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_AñadirPeliculaActionPerformed
+        ConexionJavaMongo Pelicula = new ConexionJavaMongo();
+        String Año = Info_Estreno.getText();
+        String Minutos = Info_Tiempo.getText();
+        int AñoConv = Integer.parseInt(Año);
+        int MinutosConv = Integer.parseInt(Minutos);
+        List<String> actores = Arrays.asList(Info_Actores.getText());
+       
+        Pelicula.Agregar_Pelicula(Info_NombrePeli.getText(),Info_Genero.getText(),Info_Director.getText(),
+                Info_Franquicia.getText(),Info_Pais.getText(),AñoConv,MinutosConv,Info_Compañia.getText(),actores);
+    }//GEN-LAST:event_Boton_AñadirPeliculaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,7 +200,6 @@ public class Crear extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BotonAddActores;
     private javax.swing.JButton Boton_AñadirPelicula;
     private javax.swing.JButton Boton_VolverCrear;
     private javax.swing.JLabel Franquicia;
