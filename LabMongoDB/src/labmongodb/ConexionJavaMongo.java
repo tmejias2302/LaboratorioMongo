@@ -28,6 +28,10 @@ public class ConexionJavaMongo {
     MongoCollection<Document> Coleccion_Pelicula = BD.getCollection("Pelicula");
     
     MongoCursor < Document > cursor = Coleccion_Pelicula.find().iterator();
+    
+    MongoCollection<Document> Coleccion_Compañia = BD.getCollection("Compañia_Productora");
+    
+    MongoCursor < Document > cursor2 = Coleccion_Compañia.find().iterator();
 
     //Agregar informacion al documentoPelicula
     public void Agregar_Pelicula(String Nombre_Pelicula,String Genero,String Nombre_Director,
@@ -45,6 +49,16 @@ public class ConexionJavaMongo {
         mongoClient.close();
     }
     
+    //Agregar informacion al documentoCompañia
+    public void Agregar_Compañia(String Nombre_Compañia,int año,String Web) {
+        
+        Document documentoCompañia = new Document("Nombre_Compañia", Nombre_Compañia)
+                .append("Año", año).append("Pagina_Web", Web);
+        Coleccion_Compañia.insertOne(documentoCompañia);
+        JOptionPane.showMessageDialog(null, "COMPAÑIA PRODUCTORA REGISTRADA", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+        mongoClient.close();
+    }
+    
     /*Document doc = Coleccion_Pelicula.find(Filters.or(Filters.eq("Nombre_Pelicula", "Chijiro"))).first();
     if (doc != null) {
             System.out.println(doc.getString("Franquicia"));
@@ -55,6 +69,13 @@ public class ConexionJavaMongo {
     public void Borrar_Pelicula(String Nombre_Pelicula){
         Coleccion_Pelicula.deleteOne(eq("Nombre_Pelicula", Nombre_Pelicula));
         JOptionPane.showMessageDialog(null, "PELÍCULA ELIMINADA", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+        mongoClient.close();
+    }
+    
+    //Borrar valores especificos de un documento
+    public void Borrar_Compañia(String Nombre_Compañia) {
+        Coleccion_Compañia.deleteOne(eq("Nombre_Compañia", Nombre_Compañia));
+        JOptionPane.showMessageDialog(null, "COMPAÑIA PRODUCTORA ELIMINADA", "Informacion", JOptionPane.INFORMATION_MESSAGE);
         mongoClient.close();
     }
 

@@ -2,9 +2,9 @@ package Ventanas;
 
 import javax.swing.JFrame;
 
-public class Principal extends javax.swing.JFrame {
+public class Principal2 extends javax.swing.JFrame {
 
-    public Principal() {
+    public Principal2() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -81,30 +81,30 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCrearActionPerformed
-        JFrame Crear = new Crear();
-        Crear.setLocationRelativeTo(Crear);
-        Crear.setVisible(true);
+        JFrame CrearCP = new CrearCP();
+        CrearCP.setLocationRelativeTo(CrearCP);
+        CrearCP.setVisible(true);
         this.hide();
     }//GEN-LAST:event_BotonCrearActionPerformed
 
     private void BotonLeerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonLeerActionPerformed
-        JFrame Leer = new Leer();
-        Leer.setLocationRelativeTo(Leer);
-        Leer.setVisible(true);
+        JFrame LeerCP = new LeerCP();
+        LeerCP.setLocationRelativeTo(LeerCP);
+        LeerCP.setVisible(true);
         this.hide();
     }//GEN-LAST:event_BotonLeerActionPerformed
 
     private void BotonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEliminarActionPerformed
-        JFrame Eliminar = new Eliminar();
-        Eliminar.setLocationRelativeTo(Eliminar);
-        Eliminar.setVisible(true);
+        JFrame EliminarCP = new EliminarCP();
+        EliminarCP.setLocationRelativeTo(EliminarCP);
+        EliminarCP.setVisible(true);
         this.hide();
     }//GEN-LAST:event_BotonEliminarActionPerformed
 
     private void BotonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonActualizarActionPerformed
-        JFrame Actualizar = new Actualizar();
-        Actualizar.setLocationRelativeTo(Actualizar);
-        Actualizar.setVisible(true);
+        JFrame ActualizarCP = new ActualizarCP();
+        ActualizarCP.setLocationRelativeTo(ActualizarCP);
+        ActualizarCP.setVisible(true);
         this.hide();
     }//GEN-LAST:event_BotonActualizarActionPerformed
 
@@ -132,20 +132,21 @@ public class Principal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Principal().setVisible(true);
+                new Principal2().setVisible(true);
             }
         });
     }
