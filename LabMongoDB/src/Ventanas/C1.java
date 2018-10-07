@@ -1,23 +1,23 @@
 package Ventanas;
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.Block;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Accumulators;
-import com.mongodb.client.model.Aggregates;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import org.bson.Document;
 
-public class C5 extends javax.swing.JFrame {
+public class C1 extends javax.swing.JFrame {
+
+    MongoClient mongoClient = new MongoClient("localhost", 27017);
+    MongoDatabase database = mongoClient.getDatabase("Setimo_Arte");
+
+    MongoCollection<Document> coleccionPelicula = database.getCollection("Pelicula");
 
 
-    public C5() {
+    public C1() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -62,8 +62,8 @@ public class C5 extends javax.swing.JFrame {
         getContentPane().add(Boton_VolverCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 690, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 2, 36)); // NOI18N
-        jLabel1.setText("Nombre Compañía Productora");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, 500, 40));
+        jLabel1.setText("Nombre Película");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 40, 270, 40));
 
         Info_NombrePeli.setFont(new java.awt.Font("Yu Gothic UI", 2, 18)); // NOI18N
         getContentPane().add(Info_NombrePeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 90, 330, -1));
@@ -87,53 +87,29 @@ public class C5 extends javax.swing.JFrame {
     }//GEN-LAST:event_Boton_VolverCrearActionPerformed
 
     private void Boton_BuscarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_BuscarPeliculaActionPerformed
-        MongoClient mongoClient = new MongoClient("localhost", 27017);
-        MongoDatabase BD = mongoClient.getDatabase("Setimo_Arte");
-        MongoCollection<Document> Coleccion_Pelicula = BD.getCollection("Pelicula");
-        MongoCollection<Document> Coleccion_Minutos = BD.getCollection("Grupo_Duracion");
-        BasicDBObject Query = new BasicDBObject("Compañia_Productora", Info_NombrePeli.getText());
-        int contador = 0;
-
-        DefaultListModel Elemento = new DefaultListModel();
-
-        try (MongoCursor<Document> cur = Coleccion_Pelicula.find(Query).iterator()) {
-            while (cur.hasNext()) {
-                Document doc = cur.next();
-                List list = new ArrayList(doc.values());
-                Document documentoMinutos = new Document("Nombre_Pelicula", list.get(1)).append("Duracion_Minutos", list.get(7));
-                Coleccion_Minutos.insertOne(documentoMinutos);
-                contador++;
-
+        BasicDBObject Query = new BasicDBObject("Nombre_Pelicula", Info_NombrePeli.getText());
+        coleccionPelicula.find(Query).forEach(new Block<Document>() {
+            @Override
+            public void apply(final Document document) {
+                DefaultListModel Elemento = new DefaultListModel();
+                for (int i = 1; i < 10; i++) {
+                    Elemento.addElement(document.get("Nombre_Pelicula"));
+                    Elemento.addElement(document.get("Genero"));
+                    Elemento.addElement(document.get("Nombre_Director"));
+                    Elemento.addElement(document.get("Franquicia"));
+                    Elemento.addElement(document.get("Pais_Produccion"));
+                    Elemento.addElement(document.get("Año_Estreno"));
+                    Elemento.addElement(document.get("Duracion_Minutos"));
+                    Elemento.addElement(document.get("Compañia_Productora"));
+                    Elemento.addElement(document.get("Actores"));
+                    break;
+                }
+                jList1.setModel(Elemento);
             }
-            Document DuraMax = Coleccion_Minutos.aggregate(Arrays.asList(Aggregates.group(null, Accumulators.max("maxx", "$Duracion_Minutos")))).first();
+        });
 
-            Document DuraMin = Coleccion_Minutos.aggregate(Arrays.asList(Aggregates.group(null, Accumulators.min("min", "$Duracion_Minutos")))).first();
+        //mongoClient.close();
 
-            Document Avg = Coleccion_Minutos.aggregate(Arrays.asList(Aggregates.group(null, Accumulators.avg("avg", "$Duracion_Minutos")))).first();
-
-            Elemento.addElement("Cantidad de peliculas" + " " + contador);
-            BasicDBObject Query2 = new BasicDBObject("Duracion_Minutos", DuraMax.get("maxx"));
-            MongoCursor<Document> cur2 = Coleccion_Minutos.find(Query2).iterator();
-            while (cur2.hasNext()) {
-                Document doc2 = cur2.next();
-                List list2 = new ArrayList(doc2.values());
-                Elemento.addElement("Pelicula con más minutos:" + " " + list2.get(1));
-            }
-            
-            BasicDBObject Query3 = new BasicDBObject("Duracion_Minutos", DuraMin.get("min"));
-            MongoCursor<Document> cur3 = Coleccion_Minutos.find(Query3).iterator();
-            while (cur3.hasNext()) {
-                Document doc3 = cur3.next();
-                List list3 = new ArrayList(doc3.values());
-                Elemento.addElement("Pelicula con menos minutos:" + " " + list3.get(1));
-            }
-            Elemento.addElement("Promedio de duracion de peliculas es de" + " " + Avg.get("avg"));
-            
-            jList1.setModel(Elemento);
-
-            BD.getCollection("Grupo_Duracion").drop();
-
-        }
     }//GEN-LAST:event_Boton_BuscarPeliculaActionPerformed
 
     /**
@@ -153,13 +129,13 @@ public class C5 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(C5.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(C1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(C5.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(C1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(C5.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(C1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(C5.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(C1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -169,7 +145,7 @@ public class C5 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new C5().setVisible(true);
+                new C1().setVisible(true);
             }
         });
     }

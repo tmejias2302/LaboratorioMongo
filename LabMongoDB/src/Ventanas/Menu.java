@@ -21,7 +21,9 @@ public class Menu extends javax.swing.JFrame {
         BotonCP = new javax.swing.JButton();
         BotonPelicula = new javax.swing.JButton();
         BotonSalir = new javax.swing.JButton();
+        BotonConsultas = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jLabelFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -55,9 +57,22 @@ public class Menu extends javax.swing.JFrame {
         });
         getContentPane().add(BotonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 670, 120, 50));
 
-        jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 2, 48)); // NOI18N
-        jLabel1.setText("¿Qué desea agregar a la base de datos?");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 850, -1));
+        BotonConsultas.setFont(new java.awt.Font("Yu Gothic UI", 2, 18)); // NOI18N
+        BotonConsultas.setText("Consultas");
+        BotonConsultas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonConsultasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(BotonConsultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 570, 260, 90));
+
+        jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 2, 36)); // NOI18N
+        jLabel1.setText("¿Desea realizar consultas en la base de datos?");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 850, -1));
+
+        jLabel2.setFont(new java.awt.Font("Yu Gothic UI", 2, 48)); // NOI18N
+        jLabel2.setText("¿Qué desea agregar a la base de datos?");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 850, -1));
 
         jLabelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ImagenInterfaz.jpg"))); // NOI18N
         getContentPane().add(jLabelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 921, 749));
@@ -82,6 +97,13 @@ public class Menu extends javax.swing.JFrame {
         Principal2.setVisible(true);
         this.hide();
     }//GEN-LAST:event_BotonCPActionPerformed
+
+    private void BotonConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonConsultasActionPerformed
+        JFrame Consultas = new Consultas();
+        Consultas.setLocationRelativeTo(Consultas);
+        Consultas.setVisible(true);
+        this.hide();
+    }//GEN-LAST:event_BotonConsultasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -121,9 +143,11 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonCP;
+    private javax.swing.JButton BotonConsultas;
     private javax.swing.JButton BotonPelicula;
     private javax.swing.JButton BotonSalir;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelFondo;
     // End of variables declaration//GEN-END:variables
 }

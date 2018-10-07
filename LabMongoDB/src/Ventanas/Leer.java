@@ -104,7 +104,7 @@ public class Leer extends javax.swing.JFrame {
         }
         jList1.setModel(Elemento);
 
-        mongoClient.close();
+        //mongoClient.close();
 
     }//GEN-LAST:event_Boton_BuscarPeliculaActionPerformed
 

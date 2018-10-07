@@ -91,12 +91,8 @@ public class ActualizarCP extends javax.swing.JFrame {
     }//GEN-LAST:event_Boton_VolverCrearActionPerformed
 
     private void Boton_ActualizarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_ActualizarPeliculaActionPerformed
-       /* ConexionJavaMongo peliculaActualizar = new ConexionJavaMongo();
-        if (Info_Categoria.getText().equals("Año") == true){
-            String Año = Info_Actualizar.getText();
-            int AñoConv = Integer.parseInt(Año);
-            peliculaActualizar.Actualizar_Pelicula(Info_NombrePeli, Año, Año);
-        }*/
+        ConexionJavaMongo compañiaActualizar = new ConexionJavaMongo();
+        compañiaActualizar.Actualizar_Compañia(Info_NombrePeli.getText(), Info_Categoria.getText(), Info_Actualizar.getText());
     }//GEN-LAST:event_Boton_ActualizarPeliculaActionPerformed
 
     /**
